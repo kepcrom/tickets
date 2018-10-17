@@ -5,7 +5,7 @@ from member.models import MemberProfile
 class Bar(models.Model):
     Number = models.IntegerField()
     Summary = models.TextField(blank=False,default="Summary")
-    Creator = models.OneToOneField(MemberProfile,on_delete=models.CASCADE)
+    Creator = models.ForeignKey(MemberProfile,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.Summary

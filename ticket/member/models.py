@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 class MemberProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
     picture = models.ImageField(upload_to='profile_pics',blank=True)
 
     def __str__(self):

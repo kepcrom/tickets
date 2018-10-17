@@ -15,12 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import re_path,path,include
-from member import views
+from member import views as member_views
+from rest_framework import routers
+from ticket import views
+
+router = routers.DefaultRouter(r'^api')
+router.register(r':users',views.UserViewSet)
+router.register(r':groups',views.GroupViewSet)
+router.register(r':bar',views.BarViewSet)
+router.register(r':member', views.MemberViewSet)
 
 urlpatterns = [
-    re_path(r'^$', views.index,name='index'),
+    re_path(r'^$', member_views.index,name='index'),
     path('admin/', admin.site.urls),
     path('bar/', include('bar.urls')),
     path('member/', include('member.urls')),
-    path('logout/', views.member_logout, name='logout'),
+    path('logout/', member_views.member_logout, name='logout'),
+    re_path(r'^api', include(router.urls)),
+    re_path(r'^api-auth', include('rest_framework.urls')),
 ]

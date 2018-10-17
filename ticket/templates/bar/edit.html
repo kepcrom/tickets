@@ -3,8 +3,8 @@
 
 <div class="jumbotron">
 
-  <form action="{% url 'bar:save' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+  <form action="/api:bar/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
     {{ edit_form.as_p }}
 
     <input type="submit" name="" value="Save">
