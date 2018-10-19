@@ -18,6 +18,7 @@ from django.urls import re_path,path,include
 from member import views as member_views
 from rest_framework import routers
 from ticket import views
+from rest_framework_jwt.views import refresh_jwt_token
 
 router = routers.DefaultRouter(r'^api')
 router.register(r':users',views.UserViewSet)
@@ -32,5 +33,8 @@ urlpatterns = [
     path('member/', include('member.urls')),
     path('logout/', member_views.member_logout, name='logout'),
     re_path(r'^api', include(router.urls)),
-    re_path(r'^api-auth', include('rest_framework.urls')),
+    re_path(r'^rest-auth/', include('rest_auth.urls')),
+    re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    re_path(r'^auth/', include('rest_framework.urls')),
+    re_path(r'^refresh-token/', refresh_jwt_token),
 ]
